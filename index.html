@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Breakers: The Secret Message Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .challenge {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #9f50ffd0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8326f5d0;
+        }
+        .result, .hint {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        .result {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .hint {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        .logo {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="confetti"></div>
+    <div class="container">
+        <img src="codeBreakersLogo.png" alt="Code Breakers Logo" class="logo">
+
+        <div class="challenge">
+            <h2>Challenge 1: Binary Code</h2>
+            <p>01001000 01101001</p>
+            <input type="text" id="binaryInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('binaryInput', 'Hi')">Submit</button>
+            <div class="result" id="binaryResult">Correct!</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 2: Caesar Cipher (Shift of 3)</h2>
+            <p>KHOOR ZRUOG</p>
+            <input type="text" id="caesarInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('caesarInput', 'HELLO WORLD')">Submit</button>
+            <div class="result" id="caesarResult">Correct!</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 3: Reverse Text</h2>
+            <p>!gnimmargorp evol I</p>
+            <input type="text" id="reverseInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('reverseInput', 'I love programming!')">Submit</button>
+            <div class="result" id="reverseResult">Correct!</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 4: Morse Code</h2>
+            <p>.... . .-.. .-.. ---</p>
+            <input type="text" id="morseInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('morseInput', 'HELLO')">Submit</button>
+            <div class="result" id="morseResult">Correct!</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 5: Hexadecimal Code</h2>
+            <p>48 65 6C 6C 6F</p>
+            <input type="text" id="hexInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('hexInput', 'HELLO', 'hexHint')">Submit</button>
+            <div class="result" id="hexResult">Correct!</div>
+            <div class="hint" id="hexHint">Hint: Each pair represents a character in hexadecimal format.</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 6: Atbash Cipher</h2>
+            <p>GSRH RH Z HVXIVG</p>
+            <input type="text" id="atbashInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('atbashInput', 'THIS IS A SECRET', 'atbashHint')">Submit</button>
+            <div class="result" id="atbashResult">Correct!</div>
+            <div class="hint" id="atbashHint">Hint: The Atbash cipher flips the alphabet (A ↔ Z, B ↔ Y, etc.).</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 7: Base64 Encoding</h2>
+            <p>U29sdmVkIQ==</p>
+            <input type="text" id="base64Input" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('base64Input', 'SOLVED!', 'base64Hint')">Submit</button>
+            <div class="result" id="base64Result">Correct!</div>
+            <div class="hint" id="base64Hint">Hint: Base64 encoding is commonly used in data encoding.</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 8: ROT13 Cipher</h2>
+            <p>URYYB JBEYQ</p>
+            <input type="text" id="rot13Input" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('rot13Input', 'HELLO WORLD', 'rot13Hint')">Submit</button>
+            <div class="result" id="rot13Result">Correct!</div>
+            <div class="hint" id="rot13Hint">Hint: ROT13 shifts each letter 13 places in the alphabet.</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Challenge 9: Simple Math Code</h2>
+            <p>3 + 4, 8 - 2, 5 * 1</p>
+            <input type="text" id="mathInput" placeholder="Enter your answer here">
+            <button onclick="checkAnswer('mathInput', '7 6 5', 'mathHint')">Submit</button>
+            <div class="result" id="mathResult">Correct!</div>
+            <div class="hint" id="mathHint">Hint: Solve each math problem and write the answers in order.</div>
+        </div>
+
+        <div class="challenge">
+            <h2>Congratulations!</h2>
+            <p id="codeBreakerMessage" style="display: none; font-size: 1.5em; color: #4CAF50;">Congrats! You're a CODE BREAKER!!!</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function checkAnswer(inputId, correctAnswer, hintId) {
+            const userInput = document.getElementById(inputId).value.trim().toUpperCase();
+            const correct = correctAnswer.toUpperCase();
+            const resultElement = document.getElementById(inputId.replace('Input', 'Result'));
+            const hintElement = document.getElementById(hintId);
+
+            if (userInput === correct) {
+                resultElement.style.display = 'block';
+                if (hintElement) hintElement.style.display = 'none';
+
+                checkAllCorrect();
+            } else {
+                resultElement.style.display = 'none';
+                if (hintElement) hintElement.style.display = 'block';
+            }
+        }
+
+        function checkAllCorrect() {
+            const resultElements = document.querySelectorAll('.result');
+            let allCorrect = true;
+
+            resultElements.forEach(element => {
+                if (element.style.display !== 'block') {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                document.getElementById('codeBreakerMessage').style.display = 'block';
+                confetti({
+                    particleCount: 200,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
